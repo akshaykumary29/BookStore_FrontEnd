@@ -1,6 +1,7 @@
 import { Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import '../signup/Signup.scss'
+import { registration } from '../../services/UserService'
 
 export default function Signup() {
   const [inputField, setInputField] = useState({ fullName: '', email: '', password: '', number: '' })
@@ -12,7 +13,7 @@ export default function Signup() {
     numberError: ''
   });
 
-  const inputHandler = (e) => {
+  const changeHandle = (e) => {
     setInputField({ [e.target.name]: e.target.value })
     console.log(e.target.value);
   }
@@ -41,6 +42,14 @@ export default function Signup() {
         "password": inputField.password,
         "phone": inputField.number
       }
+      registration(data)
+      .then((res) => {
+        console.log(res);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     }
   }
 
@@ -52,7 +61,7 @@ export default function Signup() {
         type="text"
         label="Full Name"
         variant='outlined'
-        onChange={inputHandler}
+        onChange={changeHandle}
         value={inputField.fullName}
         error={error.fullNameError}
         helpertext={error.fullNameError ? "fullname is required" : " "} >
@@ -66,7 +75,7 @@ export default function Signup() {
         name="email"
         label="EmaiId"
         variant='outlined'
-        onChange={inputHandler}
+        onChange={changeHandle}
         value={inputField.email}
         error={error.emailError}
         helpertext={error.emailError ? "email required" : " "} >
@@ -79,7 +88,7 @@ export default function Signup() {
         type="password"
         label="Password"
         variant='outlined'
-        onChange={inputHandler}
+        onChange={changeHandle}
         value={inputField.password}
         error={error.passwordError}
         helpertext={error.passwordError ? "password required" : " "} >
@@ -92,7 +101,7 @@ export default function Signup() {
         label="MobileNumber"
         type="number"
         variant='outlined'
-        onChange={inputHandler}
+        onChange={changeHandle}
         value={inputField.number}
         error={error.numberError}
         helpertext={error.numberError ? "phonenumber required" : " "} >

@@ -1,7 +1,8 @@
+
 @mixin basicContent {
     justify-items: center;
     align-items: center;
-    display: grid;
+    display: flex;
     color: white;
     grid-template-columns: repeat(1, 1fr);
     background-color: #a03037;

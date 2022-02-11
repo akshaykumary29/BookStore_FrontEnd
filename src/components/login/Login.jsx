@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 import { Button, TextField } from '@material-ui/core';
 import '../login/Login.scss'
+import {useHistory} from 'react-router-dom';
 
 
 function Login() {
+    let history = new useHistory();
+    
     const [inputField, setInputField] = useState({ email: '', password: '' })
 
-    const [error, setError] = useState({ emailError: '', passError: '' });
-
-    // const inputEmail = (e) => {
-    //     setInputField({ ...inputField, [e.target.name]: e.target.value })
-    //     console.log(e.target.value);
-    // }
-
-    // const inputPassword = (e) => {
-    //     setInputField(
-    //         { ...inputField, [e.target.name]: e.target.value }
-    //     )
-    //     console.log(e.target.value);
-    // }
+    const [error, setError] = useState({ emailError: false, passError: false });
 
     const inputsHandler = (e) => {
-        setInputField({ [e.target.name]: e.target.value} )
-         console.log(e.target.value);
-       }
+        setInputField({ [e.target.name]: e.target.value })
+        console.log(e.target.value);
+    }
 
     const validation = () => {
         let isError = false;
@@ -44,6 +35,17 @@ function Login() {
                 "email": inputField.email,
                 "password": inputField.password
             }
+            Login(data).then((res) => {
+                console.log(res);
+
+                localStorage.setItem('token', res.data.result.accessToken)
+                console.log("this is token" + localStorage.setItem('token', res.data.result.accessToken));
+
+                history.push('/homepage')
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         }
     }
 
@@ -59,7 +61,7 @@ function Login() {
                 // type="text"
                 label="Email Id"
                 variant="outlined"
-                fullWidth 
+                fullWidth
                 onChange={inputsHandler}
                 value={inputField.email}
                 error={error.emailError}
