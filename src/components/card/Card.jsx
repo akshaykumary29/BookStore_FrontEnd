@@ -3,11 +3,11 @@ import '../card/Card.scss'
 
 import { getBookApi } from '../../services/AxiosService';
 import thedesign from '../../assests/thedesign.png'
-import Delete from "../delete/Delete";
+import DisplayBook from "../displayBook/DisplayBook";
 
 function Card() {
     const [books, setBooks] = useState([]);
-    const [select, setSelect] = useState([]);
+    const [select, setSelect] = useState(false);
     const [viewBook, setViewBook] = useState({});
 
 
@@ -24,36 +24,36 @@ function Card() {
         getBookDetails();
     }, [])
 
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
 
     const openImage = (item) => {
-        setViewBook({ ...viewBook}, item)
+        setViewBook({ ...viewBook, item })
         setSelect(!select)
     }
 
     return (
         <div className="bookValue" >
             {
-                select ? <Delete item={viewBook} /> :
-                books.map((item, index) => (
-                    <div className="displayGrid" onClick={() => openImage(item)} open={open} >
-                        
-                        <div className="onlyImage" >
-                            <img key={index} className="image" src={thedesign} />
-                        </div>
-                        <div className="title" >
-                            <span className="bookName" >Book:{item.bookName}</span><br /><br />
-                            <span className="authorName" >Author: {item.author}</span>
-                            <div className="bookRating" >
-                                <span className="star" > 4.5* </span>
-                                <span className="reviewUser" > (20) </span>
+                select ? <DisplayBook item={viewBook} /> :
+                    books.map((item, index) => (
+                        <div className="displayGrid" key={index} value={select} >
+
+                            <div className="onlyImage" onClick={() => openImage(item)} >
+                                <img className="image" src={thedesign} />
                             </div>
-                            <div className="mainValue" >
-                                <span className="value" > Rs:- {item.price} </span>
+                            <div className="title" >
+                                <span className="bookName" >Book:{item.bookName}</span><br /><br />
+                                <span className="authorName" >Author: {item.author}</span>
+                                <div className="bookRating" >
+                                    <span className="star" > 4.5* </span>
+                                    <span className="reviewUser" > (20) </span>
+                                </div>
+                                <div className="mainValue" >
+                                    <span className="value" > Rs:- {item.price} </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))
+                    ))
             }
         </div>
     )

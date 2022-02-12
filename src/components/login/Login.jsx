@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button, TextField } from '@material-ui/core';
 import '../login/Login.scss'
-import {useHistory} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { login } from '../../services/UserService';
 
 
 function Login() {
     let history = new useHistory();
-    
+
     const [inputField, setInputField] = useState({ email: '', password: '' })
 
     const [error, setError] = useState({ emailError: false, passError: false });
@@ -35,7 +36,7 @@ function Login() {
                 "email": inputField.email,
                 "password": inputField.password
             }
-            Login(data).then((res) => {
+            login(data).then((res) => {
                 console.log(res);
 
                 localStorage.setItem('token', res.data.result.accessToken)
@@ -43,9 +44,9 @@ function Login() {
 
                 history.push('/homepage')
             })
-            .catch((err) => {
-                console.log(err);
-            })
+                .catch((err) => {
+                    console.log(err);
+                })
         }
     }
 
@@ -85,7 +86,7 @@ function Login() {
 
             </TextField>
             <br />
-            <Button className="loginButton" style={{ backgroundColor: '#A03037' }} onClick={next} > Login </Button>
+            <Link to="/homepage"> <Button className="loginButton" style={{ backgroundColor: '#A03037' }} onClick={next} > Login </Button> </Link>
 
             <p className="midBar">OR</p>
 

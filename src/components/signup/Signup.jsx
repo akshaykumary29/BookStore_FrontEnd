@@ -43,13 +43,13 @@ export default function Signup() {
         "phone": inputField.number
       }
       registration(data)
-      .then((res) => {
-        console.log(res);
+        .then((res) => {
+          console.log(res);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   }
 
