@@ -4,7 +4,10 @@ import Login from './components/login/Login';
 import Signup from './components/signup/Signup';
 import MainPage from './pages/mainPage/MainPage';
 import Header from './components/header/Header';
-import Book from './components/book/Book';
+import Home from './pages/home/Home';
+// import Book from './components/book/Book';
+// import Card from './components/card/Card';
+
 function App() {
   return (
     <div className="App">
@@ -12,8 +15,10 @@ function App() {
       <Signup />      */}
 
       {/* <MainPage /> */}
-        <Book />
+        {/* <Book /> */}
+        {/* <Card /> */}
       {/* <Header /> */}
+      <Home />
     </div>
   );
 }

@@ -9,10 +9,12 @@ function Home() {
             <Header />
             <div className="bookBundle" >
                 <div>
-                    Books
+                    
                     <Book />
                 </div>
             </div>
         </div>
     )
 }
+
+export default Home;
