@@ -36,8 +36,8 @@ function Card() {
             {
                 select ? <DisplayBook item={viewBook} /> :
                     books.map((item, index) => (
-                        <div className="displayGrid" key={index} value={select} >
-
+                        <div className="displayGrid" >
+                        {/* key={index} value={select} */}
                             <div className="onlyImage" onClick={() => openImage(item)} >
                                 <img className="image" src={thedesign} />
                             </div>

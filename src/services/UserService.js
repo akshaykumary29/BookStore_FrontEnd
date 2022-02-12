@@ -12,6 +12,6 @@ export const registration = async(data) => {
 }
 
 export const login = async(data) => {
-    let response = await axios.post("https://new-bookstore-backend.herokuapp.com/bookstore_user/registration", data);
+    let response = await axios.post("https://new-bookstore-backend.herokuapp.com/bookstore_user/login", data);
     return response;
 }

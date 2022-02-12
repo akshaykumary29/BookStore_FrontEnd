@@ -71,7 +71,7 @@ export default function Signup() {
       <TextField
         className='emailInput'
         id='outlined-required'
-        // type="email"
+        type="email"
         name="email"
         label="EmaiId"
         variant='outlined'

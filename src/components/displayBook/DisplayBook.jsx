@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import thedesign from '../../assests/thedesign.png'
 import '../displayBook/DisplayBook.scss'
 import { Button } from "@material-ui/core";
 import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
+import { addToCartApi } from "../../services/AxiosService";
 
 
 function DisplayBook(props) {
-    const [upBook, setUpBook] = React.useState(false)
-    console.log(props.item.item);
+    // const [upBook, setUpBook] = React.useState(false)
+    // console.log(props.item.item);
+
+    const [addBook, setAddBook] = useState([]);
+    const [stock, setStock] = useState(0)
+
+    const bookId = (_id) => {
+        console.log(_id);
+        addToCartApi(props.item.item._id).then((res) => {
+            console.log(res);
+            console.log("Add to bag working");
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const bookDecrement = () => {
+
+    }
+
+    const bookIncrement = () => {
+        
+    }
+
 
     return (
         <div className="displayBox" >
@@ -17,7 +40,17 @@ function DisplayBook(props) {
                     <img id="hover" src={thedesign} />
                 </div>
                 <div className="buttons" >
-                    <Button className="bagButton" style={{ backgroundColor: '#A03037', color: 'white' }} variant="contained" > ADD TO BAG </Button>
+                    {/* <Button className="bagButton" style={{ backgroundColor: '#A03037', color: 'white' }} variant="contained" > ADD TO BAG </Button>
+                    <Button className="wishlistB" style={{ backgroundColor: '#333333', color: 'white' }} variant="contained" > <FavoriteBorderOutlinedIcon /> WISHLIST </Button> */}
+                    {addBook.length === 0 ? (
+                        <Button className="bagButton" style={{ backgroundColor: '#A03037', color: 'white' }} variant="contained" onClick={() => bookId(props.item.item._id)} > ADD TO BAG </Button>
+                    ) : (
+                        <div>
+                            <Button onClick={bookDecrement} > - </Button>
+                            <Button> {stock} </Button>
+                            <Button onClick={bookIncrement} > + </Button>
+                        </div>
+                    )}
                     <Button className="wishlistB" style={{ backgroundColor: '#333333', color: 'white' }} variant="contained" > <FavoriteBorderOutlinedIcon /> WISHLIST </Button>
                 </div>
             </div>
